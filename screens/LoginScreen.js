@@ -1,10 +1,47 @@
 import { Dimensions, Image, ImageBackground, KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, TouchableOpacityBase, View } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { auth } from '../firebase'
+import { useNavigation } from '@react-navigation/native'
+import { 
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  updateProfile
+} from 'firebase/auth';
 
 const LoginScreen = () => {
 const [login, setLogin] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+
+  // const navigation = useNavigation()
+
+  // useEffect(() =>{
+  //   const unsubscribe = auth.onAuthStateChanged(user =>{
+  //     if(user){
+  //       navigation.navigate('Home')
+  //     }
+  //   })
+  //   return unsubscribe
+  // },[])
+
+  const handleRegister = () =>{
+    auth
+    .createUserWithEmailAndPassword(email, password )
+       .then(userCredentials =>{
+        const user = userCredentials.user;
+       console.log('Registered in with:', user.email)
+       }).catch((error) => alert(error.message))
+  }
+
+  const hadleLogin = () =>{
+    auth
+     .signInWithEmailAndPassword(email , password)
+     .then(userCredentials =>{
+      const user = userCredentials.user;
+     console.log('Logged in with:', user.email)
+     }).catch((error) => alert(error.message))
+}
 
   // const LoginScreen = () => {
   //   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
@@ -18,9 +55,9 @@ const [login, setLogin] = useState('')
   //   };
 
   return (
-    <View
+    <KeyboardAvoidingView
     style={styles.container}
-    behavior='padding'
+    behavior='padding' 
     >
       
      <ImageBackground resizeMode='cover' style={[styles.image,styles.container]} source={require('../assets/pic.png')}>
@@ -51,11 +88,17 @@ const [login, setLogin] = useState('')
       </View>
       <View style={styles.buttonContainer}>
         <TouchableOpacity
-        onPress={() => { }}
+        onPress={hadleLogin}
         style={styles.button}
         >
          <Text style={styles.buttonText}>Login</Text> 
         </TouchableOpacity>
+        <Text style={styles.box}>
+          Don't have an account?
+          <Text style={styles.registerText}>{''}
+          Register now
+          </Text>
+        </Text>
         {/* <TouchableOpacity
         onPress={() => { }}
         style={[styles.button, styles.buttonOutline]}
@@ -66,11 +109,11 @@ const [login, setLogin] = useState('')
       </View>
       </View>
       </ImageBackground>
-    </View>
+    </KeyboardAvoidingView>
   )
 }
 
-export default LoginScreen
+export default LoginScreen;
 
 const styles = StyleSheet.create({
   container:{
@@ -101,7 +144,6 @@ const styles = StyleSheet.create({
     marginVertical:20,
     fontSize:30,
     lineHeight:35.16,
-    fontStyle:'roboto',
     
 
   },
@@ -115,7 +157,6 @@ input:{
   paddingVertical:10,
   borderRadius:10,
   marginTop: 5,
-  border: 1,
   borderColor:'gray',
 },
 buttonText:{
@@ -147,4 +188,14 @@ buttonOutlineText:{
   fontWeight:'700',
   fontSize:16,
 },
+box:{
+marginTop:10,
+},
+registerText:{
+  color:'#FF6C00',
+  
+},
+
+
+
 })

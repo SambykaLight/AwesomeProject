@@ -1,5 +1,5 @@
 import {
-    Button,
+  Button,
   Dimensions,
   Image,
   ImageBackground,
@@ -13,7 +13,7 @@ import {
 } from "react-native";
 import { Stack, IconButton } from "@react-native-material/core";
 import React, { useEffect, useState } from "react";
-import { auth } from "../firebase";
+// import { auth } from "../firebase";
 import { useNavigation } from "@react-navigation/native";
 // import {
 //   createUserWithEmailAndPassword,
@@ -38,7 +38,8 @@ import {
   sosialLink,
   sosialBtn,
   icon,
-  sosial
+  sosial,
+  keyboardView,
 } from "./ScreensStyles";
 // import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
@@ -50,18 +51,18 @@ const RegistrationScreen = () => {
 
   const navigation = useNavigation();
 
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (user) {
-        navigation.navigate("Home");
-      }
-    });
-    return unsubscribe;
-  }, []);
+  // useEffect(() => {
+  //   const unsubscribe = auth.onAuthStateChanged((user) => {
+  //     if (user) {
+  //       navigation.navigate("Home");
+  //     }
+  //   });
+  //   return unsubscribe;
+  // }, []);
 
   const handleRegister = () => {
     auth
-      .createUserWithEmailAndPassword( email, password)
+      .createUserWithEmailAndPassword(email, password)
       .then((userCredentials) => {
         const user = userCredentials.user;
         console.log("Registered in with:", user.email);
@@ -91,23 +92,25 @@ const RegistrationScreen = () => {
   //     };
   //   }
   return (
-    <KeyboardAvoidingView style={container} behavior="padding">
+    // <View style={container}>
+    <KeyboardAvoidingView
+      style={keyboardView}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+    >
       <ImageBackground
-        resizeMode="cover"
         style={[image, container]}
         source={require("../assets/pic.png")}
       >
         <View style={wrapper}>
           <Text style={title}>Register</Text>
           <View style={inputContainer}>
+
             <TextInput
               placeholder="Login"
               value={login}
               onChangeText={(text) => setLogin(text)}
               style={input}
             />
-          </View>
-          <View style={inputContainer}>
             <TextInput
               placeholder="Email"
               value={email}
@@ -128,29 +131,38 @@ const RegistrationScreen = () => {
             </TouchableOpacity>
             <Text style={box}>
               Do have an account?
-              <Text style={registerText} onPress={() => navigation.navigate('Login')}>
+              <Text
+                style={registerText}
+                onPress={() => navigation.navigate("Login")}
+              >
                 {""} Login now
               </Text>
             </Text>
-            {/* <TouchableOpacity
-        onPress={handleRegister}
-        style={[button, buttonOutline]}
-        >
-         <Text style={buttonOutlineText}>Register</Text> 
-        </TouchableOpacity> */}
           </View>
           <View style={sosialLink}>
-          <Text style={box}>or Register with</Text>
-                <View style={sosial}>
-                <IconButton style={icon} icon={props =><Icon name="facebook"{...props}/>} ></IconButton>
-                <IconButton style={icon}  icon={props =><Icon name="twitter"{...props}/>}></IconButton>
-                <IconButton style={icon} icon={props =><Icon name="google"{...props}/>}  color={'red'} ></IconButton>
-
-                </View>
+            <Text style={box}>or Register with</Text>
+            <View style={sosial}>
+              <IconButton
+                style={icon}
+                icon={(props) => <Icon name="facebook" {...props} />}
+                color={"#3b5998"}
+              ></IconButton>
+              <IconButton
+                style={icon}
+                icon={(props) => <Icon name="twitter" {...props} />}
+                color={"#1DA1F2"}
+              ></IconButton>
+              <IconButton
+                style={icon}
+                icon={(props) => <Icon name="google" {...props} />}
+                color={"red"}
+              ></IconButton>
+            </View>
           </View>
         </View>
       </ImageBackground>
     </KeyboardAvoidingView>
+    // </View>
   );
 };
 

@@ -8,16 +8,25 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFFFFF",
   },
   image: {
+    resizeMode:"cover",
+    flex:1,
     width: "100%",
-    height: Dimensions.get("window").height / 2.2,
+    height: Dimensions.get("window").height / 2.1,
+    // width: Dimensions.get('window').width / 0.9,
+  },
+  keyboardView:{
+    // width:'100%',
+    flex:1,
   },
   wrapper: {
-    backgroundColor: "#FFFFFF",
+    // flex:1,
+    // justifyContent:'flex-end',
+    backgroundColor: "#ffffff",
     width: "100%",
-    height: Dimensions.get("window").height / 6,
-
-    borderTopLeftRadius: 30,
-    borderTopRightRadius: 30,
+    height: Dimensions.get("window").height / 9,
+    // height: '15.22%',
+    borderTopLeftRadius: 25,
+    borderTopRightRadius: 25,
     alignItems: "center",
   },
 
@@ -28,7 +37,10 @@ const styles = StyleSheet.create({
     lineHeight: 35.16,
   },
   inputContainer: {
-    width: "90%",
+    backgroundColor:'#FFFFFF',
+    width: "100%",
+    paddingHorizontal:16,
+    paddingBottom:20,
   },
   input: {
     height: 50,
@@ -45,10 +57,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   buttonContainer: {
+    backgroundColor:"#ffffff",
     width: "90%",
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 40,
+    // marginTop: 20,
   },
   button: {
     backgroundColor: "#FF6C00",
@@ -107,4 +120,5 @@ export const {
   sosialLink,
   icon,
   sosial,
+  keyboardView
 } = styles;

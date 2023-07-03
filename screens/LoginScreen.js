@@ -2,6 +2,7 @@ import {
   Dimensions,
   Image,
   ImageBackground,
+  Keyboard,
   KeyboardAvoidingView,
   StyleSheet,
   Text,
@@ -41,6 +42,7 @@ import {
   icon,
   keyboardView,
 } from "./ScreensStyles";
+import { TouchableWithoutFeedback } from "react-native";
 
 const LoginScreen = () => {
   // const [login, setLogin] = useState('')
@@ -78,17 +80,18 @@ const LoginScreen = () => {
   };
 
   // const LoginScreen = () => {
-  //   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
+    const [isShowKeyboard, setIsShowKeyboard] = useState(false);
 
-  //   const handleFocus = () => {
-  //     setIsShowKeyboard(true);
-  //   };
-  //   const handleKeyboardHide = () => {
-  //     setIsShowKeyboard(false);
-  //     Keyboard.dismiss();
-  //   };
+    const handleFocus = () => {
+      setIsShowKeyboard(true);
+    };
+    const handleKeyboardHide = () => {
+      setIsShowKeyboard(false);
+      Keyboard.dismiss();
+    };
 
   return (
+    <TouchableWithoutFeedback onPress={() => handleKeyboardHide()}>
     <KeyboardAvoidingView
       style={keyboardView}
       behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -151,6 +154,7 @@ const LoginScreen = () => {
         </View>
       </ImageBackground>
     </KeyboardAvoidingView>
+    </TouchableWithoutFeedback>
   );
 };
 

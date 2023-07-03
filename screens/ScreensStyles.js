@@ -6,21 +6,22 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#FFFFFF",
+    // justifyContent:'flex-end',
   },
   image: {
-    resizeMode:"cover",
-    flex:1,
+    resizeMode: "cover",
+    // alignItems: 'flex-end',
+    // justifyContent:'flex-end',
+    flex: 1,
     width: "100%",
     height: Dimensions.get("window").height / 2.1,
     // width: Dimensions.get('window').width / 0.9,
   },
-  keyboardView:{
+  keyboardView: {
     // width:'100%',
-    flex:1,
+    flex: 1,
   },
   wrapper: {
-    // flex:1,
-    // justifyContent:'flex-end',
     backgroundColor: "#ffffff",
     width: "100%",
     height: Dimensions.get("window").height / 9,
@@ -33,14 +34,15 @@ const styles = StyleSheet.create({
   title: {
     textAlign: "center",
     marginVertical: 20,
+    // marginTop:-32,
     fontSize: 30,
     lineHeight: 35.16,
   },
   inputContainer: {
-    backgroundColor:'#FFFFFF',
+    backgroundColor: "#FFFFFF",
     width: "100%",
-    paddingHorizontal:16,
-    paddingBottom:20,
+    paddingHorizontal: 16,
+    paddingBottom: 20,
   },
   input: {
     height: 50,
@@ -57,7 +59,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   buttonContainer: {
-    backgroundColor:"#ffffff",
+    backgroundColor: "#ffffff",
     width: "90%",
     justifyContent: "center",
     alignItems: "center",
@@ -97,6 +99,26 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
   },
+  avatarBlock: {
+    backgroundColor: "#F6F6F6",
+    borderBottomLeftRadius: 8,
+    borderBottomRightRadius: 8,
+    position: "relative",
+    width: 100,
+    height: 100,
+    top: -60,
+    borderRadius: 16,
+  },
+  avatarBtn: {
+    position: "absolute",
+
+    right: -12,
+    bottom: 14,
+  },
+  avatarBtnImg: {
+    width: 25,
+    height: 25,
+  },
   // icon: {
   //   borderRadius: "50%",
   //   borderColor: "red",
@@ -120,5 +142,8 @@ export const {
   sosialLink,
   icon,
   sosial,
-  keyboardView
+  keyboardView,
+  avatarBtn,
+  avatarBtnImg,
+  avatarBlock,
 } = styles;

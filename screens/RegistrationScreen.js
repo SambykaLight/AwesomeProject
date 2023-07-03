@@ -1,8 +1,10 @@
 import {
+  Alert,
   Button,
   Dimensions,
   Image,
   ImageBackground,
+  Keyboard,
   KeyboardAvoidingView,
   StyleSheet,
   Text,
@@ -25,7 +27,7 @@ import {
   container,
   image,
   wrapper,
-  title,
+  // title,
   inputContainer,
   input,
   buttonText,
@@ -40,9 +42,15 @@ import {
   icon,
   sosial,
   keyboardView,
+  avatarBtnImg,
+  avatarBtn,
+  avatarBlock
 } from "./ScreensStyles";
+import {titleReg} from './registrationStyle';
+import add_icon from '../assets/add_icon.png';
 // import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
+import { TouchableWithoutFeedback } from "react-native";
 
 const RegistrationScreen = () => {
   const [login, setLogin] = useState("");
@@ -81,28 +89,38 @@ const RegistrationScreen = () => {
   };
 
   //   const LoginScreen = () => {
-  //     const [isShowKeyboard, setIsShowKeyboard] = useState(false);
+      const [isShowKeyboard, setIsShowKeyboard] = useState(false);
 
-  //     const handleFocus = () => {
-  //       setIsShowKeyboard(true);
-  //     };
-  //     const handleKeyboardHide = () => {
-  //       setIsShowKeyboard(false);
-  //       Keyboard.dismiss();
-  //     };
+      const onLogin = () => {
+        Alert.alert("Credentials", `${login} + ${email} + ${password}`);
+      };
+    
+
+      const handleFocus = () => {
+        setIsShowKeyboard(true);
+      };
+      const handleKeyboardHide = () => {
+        setIsShowKeyboard(false);
+        Keyboard.dismiss();
+      };
   //   }
   return (
-    // <View style={container}>
+    <TouchableWithoutFeedback onPress={() => handleKeyboardHide()}>
     <KeyboardAvoidingView
-      style={keyboardView}
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-    >
-      <ImageBackground
+    style={keyboardView}
+    behavior={Platform.OS === "ios" ? "padding" : "height"}
+  >
+    <ImageBackground
         style={[image, container]}
         source={require("../assets/pic.png")}
       >
         <View style={wrapper}>
-          <Text style={title}>Register</Text>
+        <View style={avatarBlock}>
+        <TouchableOpacity  style={avatarBtn} onPress={()=> {}}>
+                <Image source={add_icon} style={avatarBtnImg}></Image>
+                </TouchableOpacity>
+        </View>
+          <Text style={titleReg}>Register</Text>
           <View style={inputContainer}>
 
             <TextInput
@@ -110,12 +128,14 @@ const RegistrationScreen = () => {
               value={login}
               onChangeText={(text) => setLogin(text)}
               style={input}
+              onFocus={() => handleFocus()}
             />
             <TextInput
               placeholder="Email"
               value={email}
               onChangeText={(text) => setEmail(text)}
               style={input}
+              onFocus={() => handleFocus()}
             />
             <TextInput
               placeholder="Password"
@@ -123,10 +143,11 @@ const RegistrationScreen = () => {
               onChangeText={(text) => setPassword(text)}
               style={input}
               secureTextEntry
+              onFocus={() => handleFocus()}
             />
           </View>
           <View style={buttonContainer}>
-            <TouchableOpacity onPress={handleRegister} style={button}>
+            <TouchableOpacity onPress={() => onLogin()} style={button}>
               <Text style={buttonText}>Register</Text>
             </TouchableOpacity>
             <Text style={box}>
@@ -139,7 +160,7 @@ const RegistrationScreen = () => {
               </Text>
             </Text>
           </View>
-          <View style={sosialLink}>
+          {/* <View style={sosialLink}>
             <Text style={box}>or Register with</Text>
             <View style={sosial}>
               <IconButton
@@ -158,11 +179,11 @@ const RegistrationScreen = () => {
                 color={"red"}
               ></IconButton>
             </View>
-          </View>
+          </View> */}
         </View>
       </ImageBackground>
     </KeyboardAvoidingView>
-    // </View>
+    </TouchableWithoutFeedback>
   );
 };
 

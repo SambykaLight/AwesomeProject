@@ -98,7 +98,7 @@ const LoginScreen = () => {
     >
       <ImageBackground
         style={[image, container]}
-        source={require("../assets/pic.png")}
+        source={require("../../assets/pic.png")}
       >
         <View style={wrapper}>
           <Text style={title}>Login</Text>

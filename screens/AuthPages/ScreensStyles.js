@@ -30,6 +30,12 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 25,
     alignItems: "center",
   },
+  titleReg: {
+    textAlign: "center",
+    marginTop:-32,
+    fontSize: 30,
+    lineHeight: 35.16,
+  },
 
   title: {
     textAlign: "center",

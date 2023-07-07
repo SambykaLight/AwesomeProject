@@ -1,16 +1,12 @@
 import {
   Alert,
-  Button,
-  Dimensions,
   Image,
   ImageBackground,
   Keyboard,
   KeyboardAvoidingView,
-  StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
-  TouchableOpacityBase,
   View,
 } from "react-native";
 import { Stack, IconButton } from "@react-native-material/core";
@@ -27,29 +23,20 @@ import {
   container,
   image,
   wrapper,
-  // title,
   inputContainer,
   input,
   buttonText,
   buttonContainer,
   button,
-  buttonOutline,
-  buttonOutlineText,
   box,
   registerText,
-  sosialLink,
-  sosialBtn,
-  icon,
-  sosial,
   keyboardView,
   avatarBtnImg,
   avatarBtn,
-  avatarBlock
+  avatarBlock,
 } from "./ScreensStyles";
 import {titleReg} from './registrationStyle';
-import add_icon from '../assets/add_icon.png';
-// import Icon from 'react-native-vector-icons/FontAwesome';
-import Icon from "@expo/vector-icons/MaterialCommunityIcons";
+import add_icon from '../../assets/add_icon.png';
 import { TouchableWithoutFeedback } from "react-native";
 
 const RegistrationScreen = () => {
@@ -112,7 +99,7 @@ const RegistrationScreen = () => {
   >
     <ImageBackground
         style={[image, container]}
-        source={require("../assets/pic.png")}
+        source={require("../../assets/pic.png")}
       >
         <View style={wrapper}>
         <View style={avatarBlock}>

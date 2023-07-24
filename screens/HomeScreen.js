@@ -3,10 +3,10 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import ProfileScreen from "./MainPages/ProfileScreen";
 import CreatePostsScreen from "./MainPages/CreatePostsScreen";
-import CommentsScreen from "./MainPages/CommentsScreen";
-import MapScreen from "./MainPages/MapScreen";
+import CommentsScreen from "./PostPages/CommentsScreen";
+// import MapScreen from "./MainPages/MapScreen";
 import Ionic from 'react-native-vector-icons/Ionicons'
-
+import PostScreen from "./MainPages/PostScreen";
 
 const HomeScreen = () => {
   // const Stack = createNativeStackNavigator();
@@ -14,7 +14,6 @@ const HomeScreen = () => {
 
   
     return (
-      
       <ButtomTabs.Navigator screenOptions={({ route }) => ({
         tabBarShowLable : false,
         headerShown:false,
@@ -27,11 +26,11 @@ const HomeScreen = () => {
             iconName = focused ? 'person-circle' : 'person-circle-outline';
             size = focused ? size + 8 : size + 2;
           }else if(route.name === 'CreatePosts'){
-            iconName = focused ? 'create' : 'create-outline';
+            iconName = focused ? 'add-circle' : 'add-circle-outline';
           } else if(route.name === 'Comments'){
             iconName = focused ? 'ios-create-sharp' : 'ios-create-outline';
-          }else if(route.name === 'Map'){
-            iconName = focused ? 'ios-map-sharp' : 'ios-map-outline';
+          }else if(route.name === 'Post'){
+            iconName = focused ? 'images' : 'images-outline';
           }
           return <Ionic name={iconName} size={size} color={colour}/>
 
@@ -39,8 +38,8 @@ const HomeScreen = () => {
       })}>
         <ButtomTabs.Screen name="Profile" component={ProfileScreen} />
         <ButtomTabs.Screen name="CreatePosts" component={CreatePostsScreen} />
-        <ButtomTabs.Screen name="Comments" component={CommentsScreen} />
-        <ButtomTabs.Screen name="Map" component={MapScreen} />
+        <ButtomTabs.Screen name="Post" component={PostScreen} />
+        {/* <ButtomTabs.Screen name="Comments" component={CommentsScreen} /> */}
        </ButtomTabs.Navigator>
     );
   

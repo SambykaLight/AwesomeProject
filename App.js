@@ -13,6 +13,8 @@ import AppLoading from "expo-app-loading";
 import PostScreen from "./screens/MainPages/PostScreen";
 import CreatePostsScreen from "./screens/MainPages/CreatePostsScreen";
 import ProfileScreen from "./screens/MainPages/ProfileScreen";
+import { Provider } from "react-redux";
+import { store } from "./redux/store";
 
 // import MapScreen from './screens/MainPages/MapScreen';
 // import ProfileScreen from './screens/MainPages/ProfileScreen';
@@ -59,7 +61,7 @@ const useRouter = (isAuth) => {
 
 export default function App() {
   const [isReady, setIsReady] = useState(false);
-  const routing = useRouter(null);
+  const routing = useRouter(true);
  
   if (!isReady) {
     return (
@@ -71,9 +73,11 @@ export default function App() {
     );
   }
 
-  return <NavigationContainer>
-    {routing}
-  </NavigationContainer>;
+  return <Provider store={store}>
+    <NavigationContainer>
+  {routing}
+</NavigationContainer>
+</Provider>
 }
 
 const styles = StyleSheet.create({

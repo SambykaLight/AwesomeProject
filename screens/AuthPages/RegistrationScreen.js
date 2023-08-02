@@ -19,6 +19,9 @@ import { useNavigation } from "@react-navigation/native";
 //   onAuthStateChanged,
 //   updateProfile
 // } from 'firebase/auth';
+import { authRegistration } from "../../redux/auth/authOperations";
+import { useDispatch } from "react-redux";
+
 import {
   container,
   image,
@@ -39,10 +42,19 @@ import {titleReg} from './registrationStyle';
 import add_icon from '../../assets/add_icon.png';
 import { TouchableWithoutFeedback } from "react-native";
 
+const initialState ={
+  email: '',
+  password:'',
+  nickname:'',
+}
+
 const RegistrationScreen = () => {
   const [login, setLogin] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [state, setState] = useState(initialState);
+
+  const dispatch = useDispatch();
 
   const navigation = useNavigation();
 
@@ -56,13 +68,10 @@ const RegistrationScreen = () => {
   // }, []);
 
   const handleRegister = () => {
-    auth
-      .createUserWithEmailAndPassword(email, password)
-      .then((userCredentials) => {
-        const user = userCredentials.user;
-        console.log("Registered in with:", user.email);
-      })
-      .catch((error) => alert(error.message));
+    setIsShowKeyboard(false);
+    Keyboard.dismiss();
+    dispatch(authRegistration(state));
+    setState(initialState);
   };
 
   const handleLogin = () => {
@@ -134,7 +143,7 @@ const RegistrationScreen = () => {
             />
           </View>
           <View style={buttonContainer}>
-            <TouchableOpacity onPress={() => onLogin()} style={button}>
+            <TouchableOpacity onPress={handleRegister} style={button}>
               <Text style={buttonText}>Register</Text>
             </TouchableOpacity>
             <Text style={box}>
